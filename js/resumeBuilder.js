@@ -48,8 +48,7 @@ var projects = {
 			"description" : "A little bit of Bootstrap",
 			"images" :
 			[
-				"images/me.jpg",
-				"images/me.jpg"
+				"images/mug.png"
 			]
 		},
 		{
@@ -86,3 +85,29 @@ var education = {
 	}
 	]	
 };
+
+// define encapsulated display functions for each section
+projects.display = function(){
+	for (project in projects.projects){
+		$("#projects").append(HTMLprojectStart);
+		
+		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+		$(".project-entry:last").append(formattedTitle);
+		
+		var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project]["dates worked"]);
+		$(".project-entry:last").append(formattedDates);
+
+		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description)
+		$(".project-entry:last").append(formattedDescription);
+
+		if (projects.projects[project].images.length > 0){
+			for (image in projects.projects[project].images){
+				var formattedImg = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+				$(".project-entry:last").append(formattedImg);
+			}
+		}
+	}
+}
+
+//display each section
+projects.display();
