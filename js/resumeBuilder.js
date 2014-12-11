@@ -88,15 +88,16 @@ var education = {
 
 // define encapsulated display functions for each section
 work.display = function (){
-	for (job in work.jobs) {
-		$("#workExperience").append(HTMLworkStart);
+	for (job in this.jobs) {
+		// format some html
+		var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", this.jobs[job].employer);
+		var formattedWorkTitle = HTMLworkTitle.replace("%data%", this.jobs[job].title);
+	    var formattedWorkLocation = HTMLworkLocation.replace("%data%", this.jobs[job].location);
+	    var formattedWorkDates = HTMLworkDates.replace("%data%", this.jobs[job]["dates worked"]);
+	    var formattedWorkDescription = HTMLworkDescription.replace("%data%", this.jobs[job].description);
 
-		var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
-		var formattedWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
-	    var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
-	    var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[job]["dates worked"]);
-	    var formattedWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
-
+	    // add html to DOM
+	    $("#workExperience").append(HTMLworkStart);
 		$(".work-entry:last").append(formattedWorkEmployer + formattedWorkTitle);
 		$(".work-entry:last").append(formattedWorkLocation);
 		$(".work-entry:last").append(formattedWorkDates);
@@ -106,21 +107,21 @@ work.display = function (){
 }
 
 projects.display = function(){
-	for (project in projects.projects){
+	for (project in this.projects){
 		$("#projects").append(HTMLprojectStart);
 		
-		var formattedTitle = HTMLprojectTitle.replace("%data%", projects.projects[project].title);
+		var formattedTitle = HTMLprojectTitle.replace("%data%", this.projects[project].title);
 		$(".project-entry:last").append(formattedTitle);
 		
-		var formattedDates = HTMLprojectDates.replace("%data%", projects.projects[project]["dates worked"]);
+		var formattedDates = HTMLprojectDates.replace("%data%", this.projects[project]["dates worked"]);
 		$(".project-entry:last").append(formattedDates);
 
-		var formattedDescription = HTMLprojectDescription.replace("%data%", projects.projects[project].description)
+		var formattedDescription = HTMLprojectDescription.replace("%data%", this.projects[project].description)
 		$(".project-entry:last").append(formattedDescription);
 
 		if (projects.projects[project].images.length > 0){
-			for (image in projects.projects[project].images){
-				var formattedImg = HTMLprojectImage.replace("%data%", projects.projects[project].images[image]);
+			for (image in this.projects[project].images){
+				var formattedImg = HTMLprojectImage.replace("%data%", this.projects[project].images[image]);
 				$(".project-entry:last").append(formattedImg);
 			}
 		}
