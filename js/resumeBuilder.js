@@ -27,7 +27,7 @@ var work = {
 		"title": "Senior Product Manager - Tools",
 		"location": "Redwood City, CA",
 		"dates worked": "2012-2014",
-		"description": "Managed product development of suite of HTML5 developer tools"
+		"description": "Managed suite of HTML5 developer tools"
 	},
 		{
 		"employer" : "Microsoft",
@@ -87,6 +87,24 @@ var education = {
 };
 
 // define encapsulated display functions for each section
+work.display = function (){
+	for (job in work.jobs) {
+		$("#workExperience").append(HTMLworkStart);
+
+		var formattedWorkEmployer = HTMLworkEmployer.replace("%data%", work.jobs[job].employer);
+		var formattedWorkTitle = HTMLworkTitle.replace("%data%", work.jobs[job].title);
+	    var formattedWorkLocation = HTMLworkLocation.replace("%data%", work.jobs[job].location);
+	    var formattedWorkDates = HTMLworkDates.replace("%data%", work.jobs[job]["dates worked"]);
+	    var formattedWorkDescription = HTMLworkDescription.replace("%data%", work.jobs[job].description);
+
+		$(".work-entry:last").append(formattedWorkEmployer + formattedWorkTitle);
+		$(".work-entry:last").append(formattedWorkLocation);
+		$(".work-entry:last").append(formattedWorkDates);
+		$(".work-entry:last").append(formattedWorkDescription);
+	};
+
+}
+
 projects.display = function(){
 	for (project in projects.projects){
 		$("#projects").append(HTMLprojectStart);
@@ -109,5 +127,16 @@ projects.display = function(){
 	}
 }
 
+bio.display = function (){
+
+}
+
+education.display = function(){
+
+}
+
 //display each section
 projects.display();
+work.display();
+bio.display();
+education.display();
